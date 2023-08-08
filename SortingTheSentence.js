@@ -3,21 +3,23 @@
  * @return {string}
  */
 var sortSentence = function(s) {
-    let words=s.split(' ');
-    let temp;
-    let chars=[];
-    for(let i=0;i< words.length;i++){
-        for(let j=0;j<words.length-1;j++){
-            if(Number(words[j].slice(-1))>Number(words[j+1].slice(-1))){
-                temp=words[j+1];
-                words[j+1]=words[j];
-                words[j]=temp;
-            }
-        }
-    }
     
-    for(let i=0;i<words.length;i++){
-        chars.push(words[i].slice(0,-1));
+    const select=(array,index)=>{
+        let selected=index;
+        for(let i=index+1;i<array.length;i++){
+          if(array[i].slice(-1)<array[selected].slice(-1)){
+                selected=i;
+          }
+        }
+        return selected;
     }
-    return chars.join(' ');
+    var arr=s.split(' ');
+    for(let i=0;i<arr.length;i++){
+        const selected=select(arr,i);
+        [arr[selected],arr[i]]=[arr[i],arr[selected].slice(0,-1)];
+    }
+    console.log(arr.join(' '));
+    return arr.join(' ');
 };
+
+sortSentence("is2 sentence4 This1 a3");
