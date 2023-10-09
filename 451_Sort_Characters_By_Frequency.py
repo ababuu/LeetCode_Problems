@@ -10,5 +10,4 @@ class Solution:
         a=''
         for key in n:
             a+=key*n[key]
-        b=a
-        return b
+        return a
